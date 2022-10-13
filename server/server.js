@@ -15,33 +15,33 @@ app.get('/', (req, res) => {
 });
 
 // create the get request
-app.get('/api/students', cors(), async (req, res) => {
-  // const STUDENTS = [
-
-  //     { id: 1, firstName: 'Lisa', lastName: 'Lee' },
-  //     { id: 2, firstName: 'Eileen', lastName: 'Long' },
-  //     { id: 3, firstName: 'Fariba', lastName: 'Dadko' },
-  //     { id: 4, firstName: 'Cristina', lastName: 'Rodriguez' },
-  //     { id: 5, firstName: 'Andrea', lastName: 'Trejo' },
-  // ];
-  // res.json(STUDENTS);
+app.get('/api/users', cors(), async (req, res) => {
   try {
-    const { rows: students } = await db.query('SELECT * FROM students');
-    res.send(students);
+    const { rows: users } = await db.query('SELECT * FROM users');
+    res.send(users);
   } catch (e) {
     return res.status(400).json({ e });
   }
 });
 
-// create the POST request
-app.post('/api/students', cors(), async (req, res) => {
+app.get('/api/posts', cors(), async (req, res) => {
+  try {
+    const { rows: blog_posts } = await db.query('SELECT * FROM blog_posts');
+    res.send(blog_posts);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
+// create the POST request for blog posts
+app.post('/api/posts', cors(), async (req, res) => {
   const newUser = {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
   };
   console.log([newUser.firstname, newUser.lastname]);
   const result = await db.query(
-    'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
+    'INSERT INTO blog_posts(firstname, lastname) VALUES($1, $2) RETURNING *',
     [newUser.firstname, newUser.lastname],
   );
   console.log(result.rows[0]);

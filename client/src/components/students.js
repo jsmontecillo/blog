@@ -1,37 +1,37 @@
 import { useState, useEffect } from "react";
 import Form from "./form";
 
-function Students() {
-  const [students, setStudents] = useState([]);
+function Users() {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:9000/api/students")
+    fetch("http://localhost:2020/api/users")
       .then((response) => response.json())
-      .then((students) => {
-            setStudents(students);
+      .then((users) => {
+            setUsers(users);
           });
   }, []);
 
-  const addStudent = (newStudent) => {
+  const addUser = (newUser) => {
     //console.log(newStudent);
     //postStudent(newStudent);
-    setStudents((students) => [...students, newStudent]);
+    setUsers((users) => [...users, newUser]);
   };
 
   return (
     <div className="students">
-      <h2> List of Students </h2>
+      <h2> List of Users </h2>
       <ul>
-        {students.map((student) => (
-          <li key={student.id}>
+        {users.map((u) => (
+          <li key={u.id}>
             {" "}
-            {student.firstname} {student.lastname}
+            {u.firstname} {u.lastname}
           </li>
         ))}
       </ul>
-      <Form addStudent={addStudent} />
+      <Form addUser={addUser} />
     </div>
   );
 }
 
-export default Students;
+export default Users;
