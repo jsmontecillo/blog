@@ -9,6 +9,7 @@ const LogIn = () => {
     const [users, setUsers] = useState({});
     const [loggedIn, setLoggedIn] = useState(null);
 
+
     useEffect(() => {
         fetch("http://localhost:2020/api/users")
           .then((response) => response.json())

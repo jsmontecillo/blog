@@ -1,13 +1,17 @@
 import {useState} from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const NewPost = () => {
     const [posts, setPosts] = useState([]);
     const [values, setValues] = useState({user_id: "", title: "", text: "", images: "", likes: 0});
     const [isSubmitted, setSubmitted] = useState(false);
+    const [text, setText] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newPost = values;
+        newPost.text = text;
         const rawResponse = await fetch('http://localhost:2020/api/posts', {
           method: 'POST',
           headers: {
@@ -30,29 +34,35 @@ const NewPost = () => {
         }))
     };
 
+
+    console.log(values);
+
     return (
-        <div className="form">
+    <div className="post-form">
         <h1>New Post</h1>
         <form onSubmit={handleSubmit}>
         <div className="input-container">
-            <label>Username </label>
-            <input type="text" name="userame" required defaultValue={values.username} onChange={handleInput}/>
+            <label>User Id </label><br/>
+            <input type="text" name="userame" required defaultValue={values.user_id} onChange={handleInput}/>
         </div>
         <div className="input-container">
-            <label>Password </label>
-            <input type="password" name="password" required defaultValue={values.password} onChange={handleInput}/>
+            <label>Title </label><br/>
+            <input type="password" name="password" required defaultValue={values.title} onChange={handleInput}/>
         </div>
         <div className="input-container">
-            <label>First Name </label>
-            <input type="text" name="first_name" required defaultValue={values.first_name} onChange={handleInput}/>
+            <label htmlFor="blog-post">Text</label><br/>
+            <CKEditor
+                editor={ClassicEditor}
+                data={values.text}
+                onChange={(event,editor) => {
+                    const data = editor.getData();
+                    setText(data);
+                }}
+            />
         </div>
         <div className="input-container">
-            <label>Last Name </label>
-            <input type="text" name="last_name" required defaultValue={values.last_name} onChange={handleInput}/>
-        </div>
-        <div className="input-container">
-            <label>Avatar</label>
-            <input type="text" name="image" defaultValue={values.image} onChange={handleInput}/>
+            <label>Images </label><br/>
+            <input type="text" name="last_name" required defaultValue={values.images} onChange={handleInput}/>
         </div>
         <div className="button-container">
             <input type="submit" />

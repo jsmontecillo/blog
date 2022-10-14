@@ -29,3 +29,10 @@ body {
     padding: 10px;
     float: right;
 }
+
+.new-post {
+    float: left;
+    width: 60%;
+    text-align: left;
+    padding: 5px;
+}
