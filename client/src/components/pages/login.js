@@ -7,8 +7,15 @@ const LogIn = () => {
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [users, setUsers] = useState({});
-    const [loggedIn, setLoggedIn] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(() => {
+      const saved = localStorage.getItem('LOGGED_IN');
+      const initialValue = JSON.parse(saved);
+      return initialValue || "";
+    })
 
+    useEffect(() => {
+      localStorage.setItem('LOGGED_IN', JSON.stringify(loggedIn));
+    }, [loggedIn])
 
     useEffect(() => {
         fetch("http://localhost:2020/api/users")
@@ -54,7 +61,7 @@ const LogIn = () => {
 
     return (
         <>
-        {isSubmitted ? <MainPage user={loggedIn} /> : 
+        {isSubmitted ? <><p>Thanks!</p> <Link to="/" className="link">Return</Link></>: 
         <div className="form">
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
