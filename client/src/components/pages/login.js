@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react';
+import MainPage from './mainPage.js';
+import './login.css';
 
 const LogIn = () => {
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [users, setUsers] = useState({});
+    const [loggedIn, setLoggedIn] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:2020/api/users")
@@ -11,10 +14,10 @@ const LogIn = () => {
           .then((users) => {
                 setUsers(users);
               });
-      }, []);
+    }, []);
     
     console.log(users);
-    
+
     const errors = {
         uname: "invalid username",
         pass: "invalid password"
@@ -39,6 +42,7 @@ const LogIn = () => {
             setErrorMessages({ name: "pass", message: errors.pass });
           } else {
             setIsSubmitted(true);
+            setLoggedIn(userData);
           }
         } else {
           // Username not found
@@ -48,8 +52,9 @@ const LogIn = () => {
 
     return (
         <>
-        {isSubmitted ? <div>User is successfully logged in</div> : 
-            <div className="form">
+        {isSubmitted ? <h1>Logged In</h1> : 
+        <div className="form">
+            <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
             <div className="input-container">
                 <label>Username </label>

@@ -1,0 +1,6 @@
+.post-card {
+    border: solid 1px black;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+}
