@@ -1,13 +1,31 @@
+body {
+    margin-top: 40px;
+}
 .posts {
     border: solid 1px black;
     width: 60%;
     height: 500px;
     padding: 20px;
     overflow-y: scroll;
+    background-color: white;
+    float: left;
 }
 
 .box {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container {
+    float: left;
+}
+
+.intro {
+    width: 200px;
+    text-align: right;
+    font-size: 13px;
+    height: 600px;
+    padding: 10px;
+    float: right;
 }

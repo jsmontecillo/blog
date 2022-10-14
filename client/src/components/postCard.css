@@ -1,6 +1,12 @@
 .post-card {
-    border: solid 1px black;
+    border: solid 1px darkgray;
     border-radius: 15px;
     padding: 20px;
     text-align: left;
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+.read {
+    color: black;
 }

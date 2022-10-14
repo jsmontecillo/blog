@@ -1,14 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&display=swap');
 
 body {
     font-family: 'Kosugi Maru', sans-serif;
 }
 
+.title {
+    font-family: 'BIZ UDPMincho', serif;
+    font-size: 40px;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    margin-top: -600px;
+    margin-left: 160px;
+    height: 600px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    color: white;
+}
+
 .nav-bar {
     padding: 20px;
-    background-color: darkmagenta;
+    width: 60%;
+    background-color: black;
+}
+
+.nav-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a {
+    color: white;
     margin: 10px;
+}
+
+a:hover{
+    background-color:azure;
+    color: black;
+}
+
+.links {
+    float: left;
+}
+
+.greeting {
+    float: right;
 }

@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import MainPage from './mainPage.js';
 import './login.css';
+import { BrowserRouter, Route, Link, Outlet } from "react-router-dom";
 
 const LogIn = () => {
     const [errorMessages, setErrorMessages] = useState({});
@@ -52,7 +53,7 @@ const LogIn = () => {
 
     return (
         <>
-        {isSubmitted ? <h1>Logged In</h1> : 
+        {isSubmitted ? <MainPage user={loggedIn} /> : 
         <div className="form">
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
@@ -70,6 +71,7 @@ const LogIn = () => {
                 <input type="submit" />
             </div>
             </form>
+            <Link to="/signup" className="sign-up">Sign Up</Link>
         </div>
         }
     </>

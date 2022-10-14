@@ -4,24 +4,27 @@ import Posts from '../posts.js';
 import './mainPage.css';
 import { BrowserRouter, Route, Link, Outlet } from "react-router-dom";
 
-const MainPage = () => {
+const MainPage = (props) => {
 
     return (
         <>
-            <nav className="nav-bar">
-                <Link to="/" className="link">HOME</Link>
-                <Link to="/about" className="link">ABOUT</Link>
-                <Link to="/archive" className="link">ARCHIVE</Link>
-                <span>
-                <Link to="/login" className="link">LOG IN</Link>
-                </span>
-            </nav>
-            <Header />
-            <Outlet />
             <div>
-                Hello!
+            <div className="nav-body">
+                <nav className="nav-bar">
+                    <div className="links">
+                        <Link to="/" className="link">HOME</Link>
+                        <Link to="/about" className="link">ABOUT</Link>
+                        <Link to="/archive" className="link">ARCHIVE</Link>
+                    </div>
+                    <span className="greeting">
+                    {props.user ? <span style={{color:"white"}}>Hello, {props.user.first_name}. {props.user.id === 1 ? <Link to="/newpost" className="link">NEW POST</Link> : null}</span> : (<Link to="/login" className="link">LOG IN</Link>)}
+                    </span>
+                </nav>
             </div>
+            <Outlet />
             <Posts/>
+            </div>
+            <p className="title">Philosophy of Color</p>
         </>
     )
 }

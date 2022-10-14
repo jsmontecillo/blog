@@ -24,6 +24,23 @@ app.get('/api/users', cors(), async (req, res) => {
   }
 });
 
+//new users
+app.post('/api/users', cors(), async (req, res) => {
+  const newUser = {
+    username: req.body.username,
+    password: req.body.password,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    image: req.body.image,
+  };
+  const result = await db.query(
+    'INSERT INTO users(username, password, first_name, last_name, image) VALUES($1, $2, $3, $4, $5) RETURNING *',
+    [newUser.username, newUser.password, newUser.first_name, newUser.last_name, newUser.image],
+  );
+  console.log(result.rows[0]);
+  res.json(result.rows[0]);
+});
+
 app.get('/api/posts', cors(), async (req, res) => {
   try {
     const { rows: blog_posts } = await db.query('SELECT * FROM blog_posts');
