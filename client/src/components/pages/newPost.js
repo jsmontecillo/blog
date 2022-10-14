@@ -39,7 +39,7 @@ const NewPost = () => {
 
     return (
         <>
-            {isSubmitted ? <p>Check out your post <a onClick={()=>window.location.reload()}>here</a>.</p> : (
+            {isSubmitted ? <p>Check out your post <a onClick={()=>window.location.reload()} style={{color:"black"}}>here</a>.</p> : (
                     <div className="post-form">
                     <h1>New Post</h1>
                     <form onSubmit={handleSubmit}>

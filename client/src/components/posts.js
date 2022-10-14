@@ -22,6 +22,10 @@ const Posts = (props) => {
         setPosts(posts.filter((i) => Number(id) === i.id));
     }
 
+    const handleDelete = (updatedPosts) => {
+        setPosts(updatedPosts);
+    }
+
     return (
         <div className="box">
             <div className="posts">
@@ -33,7 +37,7 @@ const Posts = (props) => {
                     }
                     {posts.map((post) => {
                         return (
-                            <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead}/>
+                            <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead} handleDelete={handleDelete}/>
                         )
                     })}
                 </div>)}
