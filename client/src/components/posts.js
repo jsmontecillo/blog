@@ -5,7 +5,14 @@ import './posts.css'
 import statue from './statue.png';
 
 const Posts = (props) => {
+    const [loggedIn, setLoggedIn] = useState(() => {
+        const saved = localStorage.getItem('LOGGED_IN');
+        const initialValue = JSON.parse(saved);
+        return initialValue || "";
+      })
     const [posts, setPosts] = useState([]);
+    const [favoritePosts, setFavoritePosts] = useState([]);
+
     useEffect(() => {
         fetch("http://localhost:2020/api/posts")
           .then((response) => response.json())
@@ -26,10 +33,23 @@ const Posts = (props) => {
         setPosts(updatedPosts);
     }
 
+    const handleFavorites = (favorites) => {
+        setFavoritePosts(favorites);
+    }
+
     return (
         <div className="box">
             <div className="posts">
-                {props.newPost ? (<div className="new-post"><NewPost /></div>) : (
+                {props.newPost ? (<div className="new-post"><NewPost /></div>) : props.favorites ? (
+                   <div className="favorites">
+                    <h1>Favorites</h1>
+                        {favoritePosts.map((post) => {
+                            return (
+                                <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead} handleDelete={handleDelete} handleFavorites={handleFavorites} />
+                            )
+                        })}
+                   </div> 
+                ) : (
                 <div className="container">
                     {posts.length === 1 ? null : (<div>
                         <img src={statue} alt="statue of david" height="550px" style={{marginLeft: "-132px"}}/>
@@ -37,7 +57,7 @@ const Posts = (props) => {
                     }
                     {posts.map((post) => {
                         return (
-                            <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead} handleDelete={handleDelete}/>
+                            <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead} handleDelete={handleDelete} handleFavorites={handleFavorites} />
                         )
                     })}
                 </div>)}

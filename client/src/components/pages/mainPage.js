@@ -13,6 +13,7 @@ const MainPage = (props) => {
         return initialValue || "";
       });
     console.log(loggedIn);
+    const [selectedFavorites, setSelectedFavorites] = useState(false);
 
     useEffect(() => {
       localStorage.setItem('LOGGED_IN', JSON.stringify(loggedIn));
@@ -28,12 +29,12 @@ const MainPage = (props) => {
                         <a onClick={() => window.location.reload()}>ARCHIVE</a>
                     </div>
                     <span className="greeting">
-                    {loggedIn ? <span style={{color:"white"}}>Hello, {loggedIn.first_name}. {loggedIn.id === 1 ? <><a onClick={() => setSelectedLink(true)}>NEW POST</a> <a onClick={() => setLoggedIn(null)}>SIGN OUT</a></> : <><a>FAVORITED</a><a onClick={() => setLoggedIn(null)}>SIGN OUT</a></>}</span> : (<Link to="/login" className="link">LOG IN</Link>)}
+                    {loggedIn ? <span style={{color:"white"}}>Hello, {loggedIn.first_name}. {loggedIn.id === 1 ? <><a onClick={() => setSelectedLink(true)}>NEW POST</a> <a onClick={() => setLoggedIn(null)}>SIGN OUT</a></> : <><a onClick={() => setSelectedFavorites(true)}>FAVORITED</a><a onClick={() => setLoggedIn(null)}>SIGN OUT</a></>}</span> : (<Link to="/login" className="link">LOG IN</Link>)}
                     </span>
                 </nav>
             </div>
             <Outlet />
-            <Posts newPost={selectedLink}/>
+            <Posts newPost={selectedLink} favorites={selectedFavorites}/>
             </div>
             <p className="title">Philosophy of Color</p>
         </>

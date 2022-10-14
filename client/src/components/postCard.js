@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import './postCard.css';
 import { BrowserRouter, Route, Link, Outlet } from "react-router-dom";
+import 'font-awesome/css/font-awesome.min.css';
 
 const PostCard = (props) => {
     const [loggedIn, setLoggedIn] = useState(() => {
@@ -10,6 +11,9 @@ const PostCard = (props) => {
       })
     const [posts, setPosts] = useState([]);
     const [nowDeleted, setNowDeleted] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [favorites, setFavorites] = useState([]);
+    
 
     const onDelete = async (ID) => {
         setNowDeleted(true);
@@ -19,6 +23,12 @@ const PostCard = (props) => {
         let deleted = deletePosts.filter((p) => p.id !== Number(ID));
         setPosts(deleted);
         props.handleDelete(posts);
+    }
+
+    const handleLiked = (likedPost) => {
+        setLiked(!liked);
+        favorites.push(likedPost);
+        props.handleFavorites(favorites);
     }
     return (
         <>
@@ -38,7 +48,7 @@ const PostCard = (props) => {
                     </>) : null}
                 </div>
                 <div className="right-footer">
-                    <span>Likes {props.data.likes}</span>
+                    <span><i className={liked ? "fa fa-heart" : "fa fa-heart-o"} onClick={() => handleLiked(props.data)}></i> Likes {props.data.likes}</span>
                 </div>
             </div>
         </div>
