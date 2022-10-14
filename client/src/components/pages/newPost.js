@@ -1,26 +1,25 @@
 import {useState} from 'react';
-import { BrowserRouter, Route, Link, Outlet } from "react-router-dom";
 
-const SignUp = () => {
-    const [users, setUsers] = useState([]);
-    const [values, setValues] = useState({username: "", password: "", first_name: "", last_name: "", image: ""});
+const NewPost = () => {
+    const [posts, setPosts] = useState([]);
+    const [values, setValues] = useState({user_id: "", title: "", text: "", images: "", likes: 0});
     const [isSubmitted, setSubmitted] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newUser = values;
-        const rawResponse = await fetch('http://localhost:2020/api/users', {
+        const newPost = values;
+        const rawResponse = await fetch('http://localhost:2020/api/posts', {
           method: 'POST',
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(newUser)
+          body: JSON.stringify(newPost)
         });
         const content = await rawResponse.json();
       
-        setUsers([...users, content]);
-        setValues({username: "", password: "", first_name: "", last_name: "", image: ""});
+        setPosts([...posts, content]);
+        setValues({user_id: "", title: "", text: "", images: "", likes: 0});
         setSubmitted(true);
     }
 
@@ -32,13 +31,12 @@ const SignUp = () => {
     };
 
     return (
-        <>
-        {isSubmitted ? (<><p>Thanks for signing up!</p><Link to="/login" className="read">Log In</Link></>) : (<div className="form">
-        <h1>Sign Up</h1>
+        <div className="form">
+        <h1>New Post</h1>
         <form onSubmit={handleSubmit}>
         <div className="input-container">
             <label>Username </label>
-            <input type="text" name="username" required defaultValue={values.username} onChange={handleInput}/>
+            <input type="text" name="userame" required defaultValue={values.username} onChange={handleInput}/>
         </div>
         <div className="input-container">
             <label>Password </label>
@@ -60,9 +58,8 @@ const SignUp = () => {
             <input type="submit" />
         </div>
         </form>
-    </div>)}
-      </>
+    </div>
     )
 }
 
-export default SignUp;
+export default NewPost;

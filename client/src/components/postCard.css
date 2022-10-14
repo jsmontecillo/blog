@@ -10,3 +10,19 @@
 .read {
     color: black;
 }
+
+.footer {
+    padding: 5px;
+}
+
+.left-footer {
+    float: left;
+}
+
+.right-footer {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}

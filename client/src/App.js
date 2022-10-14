@@ -5,6 +5,7 @@ import Students from "./components/students";
 import LogIn from './components/pages/login.js';
 import MainPage from './components/pages/mainPage.js';
 import SignUp from './components/pages/signUp.js';
+import NewPost from './components/pages/newPost.js';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<MainPage />}/>
           <Route path="login" element={<LogIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="newpost" element={<NewPost />} />
         </Routes>
       </BrowserRouter>
     </div>

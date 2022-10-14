@@ -17,7 +17,7 @@ const MainPage = (props) => {
                         <Link to="/archive" className="link">ARCHIVE</Link>
                     </div>
                     <span className="greeting">
-                    {props.user ? <span style={{color:"white"}}>Hello, {props.user.first_name}. {props.user.id === 1 ? <Link to="/newpost" className="link">NEW POST</Link> : null}</span> : (<Link to="/login" className="link">LOG IN</Link>)}
+                    {props.user ? <span style={{color:"white"}}>Hello, {props.user.first_name}. {props.user.id === 1 ? <Link to="/newpost" className="link">NEW POST</Link> : <Link to="/favorites" className="link">FAVORITED</Link>}</span> : (<Link to="/login" className="link">LOG IN</Link>)}
                     </span>
                 </nav>
             </div>
