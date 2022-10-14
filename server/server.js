@@ -52,14 +52,15 @@ app.get('/api/posts', cors(), async (req, res) => {
 
 // create the POST request for blog posts
 app.post('/api/posts', cors(), async (req, res) => {
-  const newUser = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+  const newPost = {
+    user_id: req.body.user_id,
+    title: req.body.title,
+    text: req.body.text,
+    images: req.body.images,
   };
-  console.log([newUser.firstname, newUser.lastname]);
   const result = await db.query(
-    'INSERT INTO blog_posts(firstname, lastname) VALUES($1, $2) RETURNING *',
-    [newUser.firstname, newUser.lastname],
+    'INSERT INTO blog_posts(user_id, title, text, images) VALUES($1, $2, $3, $4) RETURNING *',
+    [newPost.user_id, newPost.title, newPost.text, newPost.images],
   );
   console.log(result.rows[0]);
   res.json(result.rows[0]);

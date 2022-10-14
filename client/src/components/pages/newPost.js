@@ -38,37 +38,40 @@ const NewPost = () => {
     console.log(values);
 
     return (
-    <div className="post-form">
-        <h1>New Post</h1>
-        <form onSubmit={handleSubmit}>
-        <div className="input-container">
-            <label>User Id </label><br/>
-            <input type="text" name="userame" required defaultValue={values.user_id} onChange={handleInput}/>
-        </div>
-        <div className="input-container">
-            <label>Title </label><br/>
-            <input type="password" name="password" required defaultValue={values.title} onChange={handleInput}/>
-        </div>
-        <div className="input-container">
-            <label htmlFor="blog-post">Text</label><br/>
-            <CKEditor
-                editor={ClassicEditor}
-                data={values.text}
-                onChange={(event,editor) => {
-                    const data = editor.getData();
-                    setText(data);
-                }}
-            />
-        </div>
-        <div className="input-container">
-            <label>Images </label><br/>
-            <input type="text" name="last_name" required defaultValue={values.images} onChange={handleInput}/>
-        </div>
-        <div className="button-container">
-            <input type="submit" />
-        </div>
-        </form>
-    </div>
+        <>
+            {isSubmitted ? <p>Check out your post <a onClick={()=>window.location.reload()}>here</a>.</p> : (
+                    <div className="post-form">
+                    <h1>New Post</h1>
+                    <form onSubmit={handleSubmit}>
+                    <div className="input-container">
+                        <input type="text" name="user_id" placeholder="User ID" required defaultValue={values.user_id} onChange={handleInput}/>
+                    </div><br/>
+                    <div className="input-container">
+                        <input type="text" name="title" placeholder="Title" required defaultValue={values.title} onChange={handleInput}/>
+                    </div><br/>
+                    <div className="input-container">
+                        <label htmlFor="blog-post">Text</label><br/>
+                        <CKEditor
+                            editor={ClassicEditor}
+                            data={values.text}
+                            onChange={(event,editor) => {
+                                const data = editor.getData();
+                                setText(data);
+                            }}
+                            placeholder="Text"
+                        />
+                    </div><br/>
+                    <div className="input-container">
+                        <input type="text" name="images" placeholder="Image URL" defaultValue={values.images} onChange={handleInput}/>
+                    </div><br/>
+                    <div className="button-container">
+                        <input type="submit" />
+                    </div>
+                    </form>
+                </div>
+            )}
+        </>
+
     )
 }
 
