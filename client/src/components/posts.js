@@ -3,6 +3,7 @@ import PostCard from './postCard';
 import NewPost from './pages/newPost';
 import './posts.css'
 import statue from './statue.png';
+import janice from './janice.jpg';
 
 const Posts = (props) => {
     const [loggedIn, setLoggedIn] = useState(() => {
@@ -12,6 +13,7 @@ const Posts = (props) => {
       })
     const [posts, setPosts] = useState([]);
     const [favoritePosts, setFavoritePosts] = useState([]);
+    const [editedPost, setEditedPost] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:2020/api/posts")
@@ -37,6 +39,10 @@ const Posts = (props) => {
         setFavoritePosts(favorites);
     }
 
+    const handleEdit = (post) => {
+        setEditedPost(post);
+    }
+
     return (
         <div className="box">
             <div className="posts">
@@ -57,7 +63,7 @@ const Posts = (props) => {
                     }
                     {posts.map((post) => {
                         return (
-                            <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead} handleDelete={handleDelete} handleFavorites={handleFavorites} />
+                            <PostCard data={post} postLength={posts.length} key={post.id} handleRead={handleRead} handleDelete={handleDelete} handleFavorites={handleFavorites} handleEdit={handleEdit}/>
                         )
                     })}
                 </div>)}
